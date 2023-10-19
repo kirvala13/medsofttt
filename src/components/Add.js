@@ -43,7 +43,7 @@ function Add({ open, setPopup }) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "ეს ველი სავალდებულოა"
+                                    message: "არა ვალიდური"
                                 },
                                 { whitespace: true },
                                 { min: 3, message: "არავალიდური სახელი" }
@@ -55,7 +55,7 @@ function Add({ open, setPopup }) {
                          rules={[
                             {
                                 required: true,
-                                message: "ეს ველი სავალდებულოა"
+                                message: "არა ვალიდური"
                             }
                         ]}
                         >
@@ -66,7 +66,7 @@ function Add({ open, setPopup }) {
                         rules={[
                                 {
                                     required: true,
-                                    message: "ეს ველი სავალდებულოა"
+                                    message: "არა ვალიდური"
                                 }
                             ]} >
                             <Select placeholder="აირჩიე სქესი">
@@ -79,7 +79,7 @@ function Add({ open, setPopup }) {
                         rules={[
                             {
                                 required: true,
-                                message: "ეს ველი სავალდებულოა"
+                                message: "არა ვალიდური"
                             },
                             { pattern: new RegExp(/^5\d{8,9}$/) , message: "არასწორი  ნომერი" }
                         ]}>
@@ -93,7 +93,7 @@ function Add({ open, setPopup }) {
                          rules={[
                             {
                                 required: true,
-                                message: "ეს ველი სავალდებულოა"
+                                message: "არა ვალიდური"
                             }
                         ]}>
                             <Select placeholder="მისამართი">
@@ -121,7 +121,7 @@ function Add({ open, setPopup }) {
                             rules={[
                                 {
                                     required: true,
-                                    message: "ეს ველი სავალდებულოა"
+                                    message: "არა ვალიდური"
                                 },
                                 { type: 'email', message: "არასწორი მეილი" },
                             ]}>

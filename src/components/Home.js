@@ -9,23 +9,7 @@ function Home() {
     const [check, setCheck] = useState(-1)
   
 
-    // const columns = [
-    //     {
-    //         title: 'სახელი გვარი',
-    //         dataIndex: 'fullName',
-    //         key: 'fullName',
-    //     },
-    //     {
-    //         title: 'დაბ თარიღი',
-    //         dataIndex:"dob" ,
-    //         key: 'dob',
-    //     },
-    //     {
-    //         title: 'სქესი',
-    //         dataIndex: 'address',
-    //         key: 'address',
-    //     },
-    // ];
+   
     return (
         <div>
             <Buttons edited={edit} pend={isPanding} check={check} />

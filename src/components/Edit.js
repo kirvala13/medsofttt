@@ -1,109 +1,142 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Validation from '../hooks/Validation';
-function Edit({ open, edited, setEdit }) {
+import { Button, Form, Input, Select } from 'antd';
 
-    const [errors, setErrors] = useState({})
-   
-    const [rame, setRame] = useState({
-        FullName: "",
-        BDATE: "",
-        Gender: "",
-        Phone: "",
-        Address: ""
-    })
+function Edit({ open, edited, setEdit,form }) {
 
-    const { FullName, BDATE, Gender, Phone, Address } = rame;
-    const obj = { FullName, BDATE, Gender, Phone, Address }
-    const upMethod = () => {
-        axios.put(`http://localhost:3001/patients/${edited.id}`, obj).then(res =>
+    const upMethod = (e) => {
+
+        axios.put(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/${edited.id}`,
+            {
+                fullName: e?.fullName,
+                dob: Date.parse(e?.dob) / 1000,
+                genderId: e?.genderId,
+                phone: e?.phone,
+                address: e?.address,
+                personalNum: e?.personalNum,
+                email: e?.email
+            }
+
+        ).then(res =>
             console.log(res.data)
-        )
+        ).catch(err=> console.log(err))
         setEdit(false)
-        // window.location.reload();
-    }
- 
-    const change = (e) => {
-        const clone = { ...rame }
-        clone[e.target.name] = e.target.value;
-        setRame(clone)
-    }
-    const hds = () => {
-        setRame({
-            ...rame,
-            "BDATE": edited.BDATE,
-            "FullName": edited.FullName,
-            "Gender": edited.Gender,
-            "Phone": edited.Phone,
-            "Address": edited.Address,
-        })
-    }
-    useEffect(() => {
-        const tm = setTimeout(() => {
 
-            setErrors(Validation(rame))
-        }, 500)
-    }, [rame])
 
-  useEffect(()=>{
-      if (!edited) {
-        console.log("nun");
-    } else {
-       hds()
     }
     
-  },[edited])
-
-
-
-
     return (
         open ? (
             <>
-                <div className='pop'>
+                <div>
+                    <div className='pop'>
+                        <Form form={form} autoComplete='off' onFinish={(value) => {
+                            upMethod(value)
+                            // console.log(value)
+                        }}>
+                            <Form.Item
+                                style={{ height: "50px" }}
+                                name="fullName"
+                                label="სახელი გვარი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "არა ვალიდური"
+                                    },
+                                    { whitespace: true },
+                                    { min: 3, message: "არავალიდური სახელი" }
+                                ]}
+                            >
+                                <Input placeholder='სახელი გვარი'  />
+                            </Form.Item>
+                            <Form.Item style={{ height: "50px" }} name="dob" label="დაბ თარიღი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "არა ვალიდური"
+                                    }
+                                ]}
+                            >
+                                <Input type='date'  />
+                            </Form.Item>
 
-                    <form onSubmit={upMethod}>
-                        <div className="inputs">
-                            <label for="name">სახელი გვარი</label>
-                            <input type="text" name='FullName' placeholder='სახელი გვარი' onChange={change} value={rame.FullName} required />
-                           {errors.name && <h6 className='err'>{errors.name}</h6>}
-                        </div>
-                        <div className="inputs">
-                            <label for="date">დაბ თარიღი</label>
-                            <input type="date" name='BDATE' value={BDATE} onChange={change} />
-                            {errors.date && <h6 className='err'>{errors.date}</h6>}
-                        </div>
-                        <div className="inputs">
-                            <label for="Gender">სქესი</label>
-                            <select  name="Gender" value={Gender} onChange={change}>
-                               
-                                <option  value="მამრობით">მამრობითი</option>
-                                <option  value="მდედრობითი">მდედრობითი</option>
-                            </select>
-                            {errors.Gender && <h6 className='err'>{errors.Gender}</h6>}
-                        </div>
-                        <div className="inputs">
-                            <label for="number">მობ ნომერი</label>
-                            <input type="number" name='Phone' onChange={change} placeholder='59x-xxx-xxx' value={Phone} />
-                            {errors.Phone && <h6 className='err'>{errors.Phone}</h6>}
-                        </div>
-                        <div className="inputs">
-                            <label for="adress">მისამართი</label>
-                            <div className="inputs">
-                                <select name="Address" value={Address} onChange={change}>
-                                  
-                                    <option value="თელავი">თელავი</option>
-                                    <option value="თბილისი">თბილისი</option>
-                                    <option value="გორი">გორი</option>
-                                    <option value="ბათუმი">ბათუმი</option>
-                                    {errors.Address && <h6 className='err'>{errors.Address}</h6>}
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                    <div style={{ display: 'flex', gap: "5px" }}>
-                        <button disabled={Object.keys(errors).length}  className='btn' onClick={upMethod}>Update</button>
-                        <button className='btn' onClick={() => setEdit(false)}>Cancel</button>
+                            <Form.Item style={{ height: "50px" }} name="genderId" label="სქესი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "არა ვალიდური"
+                                    }
+                                ]} >
+                                <Select placeholder="აირჩიე სქესი" value="soso" >
+                                    <Select.Option value="1">მამრობითი</Select.Option>
+                                    <Select.Option value="0" >მდედრობითი</Select.Option>
+                                </Select>
+                            </Form.Item>
+
+                            <Form.Item style={{ height: "50px" }} name="phone" label="მობ ნომერი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "არა ვალიდური"
+                                    },
+                                    { pattern: new RegExp(/^5\d{8,9}$/), message: "არასწორი  ნომერი" }
+                                ]}>
+
+                                <Input type='number' placeholder='მობილურის ნომერი' />
+
+                            </Form.Item>
+
+
+                            <Form.Item style={{ height: "50px" }} name="address" label="მისამართი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "არა ვალიდური"
+                                    }
+                                ]}>
+                                <Select placeholder="მისამართი" >
+                                    <Select.Option value="თელავი">თელავი</Select.Option>
+                                    <Select.Option value="თბილისი" >თბილისი</Select.Option>
+                                    <Select.Option value="გორი" >გორი</Select.Option>
+                                    <Select.Option value="ბათუმი" >ბათუმი</Select.Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item style={{ height: "50px" }} name="personalNum" label="პირადი ნომერი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "ეს ველი სავალდებულოა"
+                                    },
+                                    { min: 11, message: "არასწორი პირადი ნომერი" },
+                                    { max: 11, message: "არასწორი პირადი ნომერი" }
+                                ]}
+                            >
+                                <Input type='number' placeholder='პირადი ნომერი'  />
+                            </Form.Item>
+
+                            <Form.Item style={{ height: "50px" }}
+                                name="email" label="მეილი"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "არა ვალიდური"
+                                    },
+                                    { type: 'email', message: "არასწორი მეილი" },
+                                ]}>
+                                <Input type='email' placeholder='მეილი'  />
+                            </Form.Item>
+
+                            <Form.Item   >
+                                <div style={{ display: 'flex', gap: "5px", alignItems: "baseline" }}>
+                                    <Button type='primary' htmlType='submit' >
+                                        დამატება
+                                    </Button>
+                                    <Button type='primary' style={{ marginTop: "10px" }} danger htmlType='submit' onClick={() => setEdit(false)}>
+                                        დახურვა
+                                    </Button>
+                                </div>
+                            </Form.Item>
+                        </Form>
                     </div>
                 </div>
             </>
