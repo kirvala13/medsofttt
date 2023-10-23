@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button, Form, Input, Select } from 'antd';
+import { useSelector } from 'react-redux';
 
-function Edit({ open, edited, setEdit,form }) {
-
+function Edit({ open, edited, setEdit,form,setch }) {
+    const disDate = useSelector((state)=>{
+        return state.users.users
+    })
     const upMethod = (e) => {
 
-        axios.put(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/${edited.id}`,
+        axios.put(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/${disDate.id}`,
             {
                 fullName: e?.fullName,
                 dob: Date.parse(e?.dob) / 1000,
@@ -22,7 +25,7 @@ function Edit({ open, edited, setEdit,form }) {
         ).catch(err=> console.log(err))
         setEdit(false)
 
-
+    setch(-1)
     }
     
     return (
