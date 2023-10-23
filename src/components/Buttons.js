@@ -35,9 +35,11 @@ function Buttons({ edited, pend, check }) {
         <div className='button'>
             <Add open={popup} setPopup={setPopup} />
             <Button type='primary' onClick={() => setPopup(true)}> <img src={add} alt='add' /> დამატება </Button>
-            <Button type="dashed" onClick={() =>
-                (setEdit(true), handleSetFieldValue())
-            } disabled={check === -1} > <img src={edit} alt='add' /> რედაქტირება </Button>
+            <Button type="dashed" onClick={() =>(setEdit(true), handleSetFieldValue())} 
+                disabled={check === -1} > 
+                <img src={edit} alt='add' />
+                 რედაქტირება
+            </Button>
             <Edit form={form} open={eedit} edited={edited} setEdit={setEdit} pend={pend} />
             <Button type="primary" danger onClick={() => setDelete(true)} disabled={check === -1}><img src={delet} alt='add' /> წაშლა </Button>
             <Delete open={deletePat} edited={edited} setDelete={setDelete} />

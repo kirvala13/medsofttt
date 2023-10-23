@@ -9,13 +9,9 @@ function Home() {
     const [check, setCheck] = useState(-1)
   
 
-   
     return (
         <div>
             <Buttons edited={edit} pend={isPanding} check={check} />
-
-
-            {/* <Table dataSource={data} columns={columns} />; */}
             <table>
                 <tr>
                     <th>ID</th>
@@ -29,38 +25,38 @@ function Home() {
                 </tr>
 
                 {
-                   isPanding?null:
-                    data.map((res,i) => {
-                        
-                        return (
+                    isPanding ? null :
+                        data.map((res, i) => {
 
-                            <tr 
-                            onClick={(e)=>{
-                                setEdit(res) 
-                                setCheck(i)
-                                i === check? setCheck(-1): setCheck(i)
-                            }}
-                            style={{
-                                background: check === i ? 'lightblue' : 'white'
-                              }}
-                             key={res.id}>
-                                <td>{res.id}</td>
-                                <td>{res.fullName}</td>
+                            return (
 
-                                <td> {new Date(res.dob * 1000).toLocaleDateString("de-De",{
-                                    day:"2-digit",
-                                    month:"2-digit",
-                                    year:'numeric'
-                                }) }</td>
-                                <td>{res.genderId === "0" ? "მდედრობითი":"მამრობითი"}</td>
-                                <td>{res.phone}</td>
-                                <td>{res.address}</td>
-                                <td>{res.personalNum}</td>
-                                <td>{res.email}</td>
-                            </tr>
+                                <tr
+                                    onClick={(e) => {
+                                        setEdit(res)
+                                        setCheck(i)
+                                        i === check ? setCheck(-1) : setCheck(i)
+                                    }}
+                                    style={{
+                                        background: check === i ? 'lightblue' : 'white'
+                                    }}
+                                    key={res.id}>
+                                    <td>{res.id}</td>
+                                    <td>{res.fullName}</td>
 
-                        )
-                    })
+                                    <td> {new Date(res.dob * 1000).toLocaleDateString("de-De", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: 'numeric'
+                                    })}</td>
+                                    <td>{res.genderId === "0" ? "მდედრობითი" : "მამრობითი"}</td>
+                                    <td>{res.phone}</td>
+                                    <td>{res.address}</td>
+                                    <td>{res.personalNum}</td>
+                                    <td>{res.email}</td>
+                                </tr>
+
+                            )
+                        })
                 }
             </table>
         </div>

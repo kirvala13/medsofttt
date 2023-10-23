@@ -10,7 +10,7 @@ function useFetch(url) {
     axios.get(url).then(res=>{ 
        setData(res.data);
        setIspending(false)   
-     })
+     }).catch(err=>console.log(err)) 
     }, 1000)
    },[data])
    return {data, isPanding}
