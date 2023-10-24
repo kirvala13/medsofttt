@@ -6,12 +6,15 @@ function useFetch(url) {
     const[isPanding,setIspending]=useState(true);
     
    useEffect(()=>{
-    setTimeout(() => {
+   const tm =  setTimeout(() => {
     axios.get(url).then(res=>{ 
        setData(res.data);
+      
        setIspending(false)   
-     }).catch(err=>console.log(err)) 
+     }).catch(err=> clearTimeout(tm)) 
     }, 1000)
+   //  !isPanding&&clearTimeout(tm)
+   
    },[data])
    return {data, isPanding}
 }

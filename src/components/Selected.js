@@ -6,7 +6,7 @@ function Selected() {
     const disDate = useSelector((state)=>{
         return state.users.users[0]
     })
-
+  
   return (
     <div style={{ margin:"0px 0px 40px"}}>
         <p>{disDate.fullName}</p>

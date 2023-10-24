@@ -13,7 +13,7 @@ function Delete({ setDelete,open,setch }) {
         ).catch(err=>console.log(err))
       
         setDelete(false)
-    //   window.location.reload()
+   
        
     }
     return (

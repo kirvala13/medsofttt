@@ -63,36 +63,30 @@ function Home() {
             title: 'მეილი',
             dataIndex: 'email',
             key: 'email',
-        },
+        }
     ];
+   
+    
     const rowSelection = {
-        onChange: (selectedRowKeys: React.Key[], selectedRows) => {
+        onChange: (selectedRowKeys, selectedRows) => {
             
             userNew(selectedRows)
-            
+            setEdit(selectedRows)
             selectedRowKeys === check ? setCheck(-1) : setCheck(selectedRowKeys);
-        },
-        getCheckboxProps: (record: DataType) => ({
-            disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            name: record.name,
-        }),
+           
+        }
     };
-    const [selectionType, setSelectionType] = useState('radio');
-
 
     return (
         <div style={{ margin: "40px 0px" }}>
             <Buttons edited={edit} pend={isPanding} check={check} setch={setCheck} />
-            <Radio.Group    
-                value={"radio"}
-            ></Radio.Group>
+             
             <Table
-
-                columns={columns} dataSource={data} rowKey={"id"} rowSelection={{
-                    type: selectionType,
-                    ...rowSelection,
-                    
-                }} />
+                 
+                columns={columns} dataSource={data} rowKey={"id"}   rowSelection={{
+                    type: 'radio',
+                   ...rowSelection
+                  }}/>
 
             {check === -1 ? null : <Selected />}
         </div>

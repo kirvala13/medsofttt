@@ -7,7 +7,7 @@ function Add({ open, setPopup }) {
     //http request 
     const upMethod = (e) => {
 
-        axios.post(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/`, 
+        axios.post("https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/", 
          {
             fullName: e.fullName,
             dob: Date.parse(e.dob)/1000,
@@ -20,9 +20,10 @@ function Add({ open, setPopup }) {
         
         ).then(res =>
             console.log(res.data),
-           
+            
         ).catch(err=>console.log(err))
         setPopup(false)
+       
     }
  
   
