@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { addUser } from '../redux/UserReducer'
+import { Modal } from 'antd'
 
 function Delete({ setDelete,open,setch }) {
     const disDate = useSelector((state)=>{
@@ -25,13 +26,14 @@ function Delete({ setDelete,open,setch }) {
        
     }
     return (
-        open ? <div className='delete'><h1>გსურთ მონიშნული ჩანაწერის წაშლა?</h1>
+        <Modal open={open} footer={[]}>
+            <h1 style={{textAlign:"center"}}>გსურთ წაშლა?</h1>
             <div className="buttonDelete">
                 <button onClick={deletMethod}>Yes</button>
                 <button onClick={() => setDelete(false)}>no</button>
             </div>
 
-        </div> : null
+        </Modal>
     )
 }
 
