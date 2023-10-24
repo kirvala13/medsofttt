@@ -25,7 +25,7 @@ function Edit({ open, edited, setEdit,form,setch }) {
             console.log(res.data)
         ).catch(err=> console.log(err))
         setEdit(false)
-       setch(-1)
+      window.location.reload()
     
     }
     

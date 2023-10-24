@@ -10,7 +10,11 @@ function Selected() {
   return (
     <div style={{ margin:"0px 0px 40px"}}>
         <p>{disDate.fullName}</p>
-        <p>{disDate.dob}</p>
+        <p>{new Date(disDate.dob * 1000).toLocaleDateString('de-DE', {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            })}</p>
         <p>{disDate.genderId==="0"?"მდედრობითი":"მამრობითი"}</p>
         <p>{disDate.phone}</p>
         <p>{disDate.address}</p>

@@ -10,7 +10,7 @@ function Home() {
     const { data, isPanding } = useFetch("https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/");
     const [edit, setEdit] = useState(null);
     const [check, setCheck] = useState(-1)
-
+    
     const dispatch = useDispatch();
 
     const userNew = (data) => {
@@ -18,6 +18,11 @@ function Home() {
     }
 
     const columns = [
+        {
+            title: 'id',
+            dataIndex: 'id',
+            key: 'id',
+        },
         {
             title: 'სახელი გვარი',
             dataIndex: 'fullName',
@@ -62,7 +67,7 @@ function Home() {
     ];
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[], selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            
             userNew(selectedRows)
             
             selectedRowKeys === check ? setCheck(-1) : setCheck(selectedRowKeys);
