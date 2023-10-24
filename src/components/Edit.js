@@ -22,10 +22,11 @@ function Edit({ open, edited, setEdit,form,setch }) {
             }
 
         ).then(res =>
-            console.log(res.data)
+            console.log(res.data),
+            
         ).catch(err=> console.log(err))
         setEdit(false)
-      window.location.reload()
+     
     
     }
     

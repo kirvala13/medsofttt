@@ -19,9 +19,10 @@ function Add({ open, setPopup }) {
          }
         
         ).then(res =>
-            console.log(res.data)
+            console.log(res.data),
+           
         ).catch(err=>console.log(err))
-        setPopup(false)    
+        setPopup(false)
     }
  
   

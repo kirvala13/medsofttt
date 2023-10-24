@@ -8,12 +8,12 @@ function Delete({ setDelete,open,setch }) {
     })
     const deletMethod = () => {
         axios.delete(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/${disDate[0].id}`).then(res=>
-              console.log(res), 
+              console.log(res.data), 
               
         ).catch(err=>console.log(err))
       
         setDelete(false)
-      window.location.reload()
+    //   window.location.reload()
        
     }
     return (
