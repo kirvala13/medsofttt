@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Buttons from './Buttons'
-import { Table } from 'antd';
+import { Table, Radio } from 'antd';
 import useFetch from '../hooks/useFetch'
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/UserReducer';
 import Selected from './Selected';
@@ -11,12 +10,13 @@ function Home() {
     const { data, isPanding } = useFetch("https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/");
     const [edit, setEdit] = useState(null);
     const [check, setCheck] = useState(-1)
-    
+
     const dispatch = useDispatch();
-  
+
     const userNew = (data) => {
         dispatch(addUser(data))
     }
+
     const columns = [
         {
             title: 'სახელი გვარი',
@@ -27,17 +27,17 @@ function Home() {
             title: 'დაბ თარიღი',
             dataIndex: 'dob',
             key: 'dob',
-            render:dob=> new Date(dob *1000).toLocaleDateString('de-DE',{
-                day:"2-digit",
-                month:"2-digit",
-                year:"numeric"
+            render: dob => new Date(dob * 1000).toLocaleDateString('de-DE', {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
             })
         },
         {
             title: 'სქესი',
             dataIndex: 'genderId',
             key: 'genderId',
-            render: text => text === 0 ? "მდედრობითი" : "მამრობითი"
+            render: text => text === "0" ? "მდედრობითი" : "მამრობითი"
         },
         {
             title: 'ტელეფონი',
@@ -60,20 +60,36 @@ function Home() {
             key: 'email',
         },
     ];
+    const rowSelection = {
+        onChange: (selectedRowKeys: React.Key[], selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            userNew(selectedRows)
+            
+            selectedRowKeys === check ? setCheck(-1) : setCheck(selectedRowKeys);
+        },
+        getCheckboxProps: (record: DataType) => ({
+            disabled: record.name === 'Disabled User', // Column configuration not to be checked
+            name: record.name,
+        }),
+    };
+    const [selectionType, setSelectionType] = useState('radio');
+
+
     return (
-        <div style={{ margin:"40px 0px"}}>
+        <div style={{ margin: "40px 0px" }}>
             <Buttons edited={edit} pend={isPanding} check={check} setch={setCheck} />
-            <Table onRow={(record, rowIndex) => {
-                return {
-                    onClick: (event) => {
-                       userNew(record)
-                       
-                       rowIndex === check ? setCheck(-1) : setCheck(rowIndex)
-                     }
-                };
-                
-            }} columns={columns} dataSource={data} rowKey={"id"}  />
-           {check=== -1 ? null : <Selected />}  
+            <Radio.Group    
+                value={"radio"}
+            ></Radio.Group>
+            <Table
+
+                columns={columns} dataSource={data} rowKey={"id"} rowSelection={{
+                    type: selectionType,
+                    ...rowSelection,
+                    
+                }} />
+
+            {check === -1 ? null : <Selected />}
         </div>
     )
 }

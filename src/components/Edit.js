@@ -7,9 +7,10 @@ function Edit({ open, edited, setEdit,form,setch }) {
     const disDate = useSelector((state)=>{
         return state.users.users
     })
+
     const upMethod = (e) => {
 
-        axios.put(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/${disDate.id}`,
+        axios.put(`https://64d3873467b2662bf3dc5f5b.mockapi.io/family/patients/${disDate[0].id}`,
             {
                 fullName: e?.fullName,
                 dob: Date.parse(e?.dob) / 1000,
@@ -24,8 +25,8 @@ function Edit({ open, edited, setEdit,form,setch }) {
             console.log(res.data)
         ).catch(err=> console.log(err))
         setEdit(false)
-
-    setch(-1)
+       setch(-1)
+    
     }
     
     return (

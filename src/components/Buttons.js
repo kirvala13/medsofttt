@@ -17,7 +17,7 @@ function Buttons({ edited, pend, check,setch }) {
         return state.users.users
     })
     const handleSetFieldValue = () => {
-        const date = new Date(disDate?.dob * 1000); // Multiply by 1000 to convert seconds to milliseconds
+        const date = new Date(disDate[0]?.dob * 1000); // Multiply by 1000 to convert seconds to milliseconds
 
         // Get the year, month, and day
         const year = date.getFullYear();
@@ -26,13 +26,13 @@ function Buttons({ edited, pend, check,setch }) {
         const formattedDate = `${year}-${month}-${day}`;
         // Set a specific field's value
         form.setFieldsValue({
-            fullName: disDate.fullName,
+            fullName: disDate[0].fullName,
             dob: formattedDate,
-            genderId: disDate.genderId=== "0" ? "მდედრობითი" : "მამრობითი" ,
-            phone: disDate.phone,
-            address: disDate.address,
-            personalNum: disDate.personalNum,
-            email: disDate.email
+            genderId: disDate[0].genderId=== "0" ? "მდედრობითი" : "მამრობითი" ,
+            phone: disDate[0].phone,
+            address: disDate[0].address,
+            personalNum: disDate[0].personalNum,
+            email: disDate[0].email
         });
     };
     return (
