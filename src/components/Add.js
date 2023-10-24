@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import { addUser } from '../redux/UserReducer';
 import { Button, Form, Input, Select } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 function Add({ open, setPopup }) {
-   
+
+    const disDate = useSelector((state) => {
+        return state.users.users
+    })
+    const dispatch = useDispatch();
+
+    const userNew = (data) => {
+        dispatch(addUser(data))
+    }
     //http request 
     const upMethod = (e) => {
 
@@ -18,12 +27,14 @@ function Add({ open, setPopup }) {
             email:e.email
          }
         
-        ).then(res =>
-            console.log(res.data),
+        ).then(res =>{
+            userNew(res.data)
+            window.location.reload() 
+        }
             
         ).catch(err=>console.log(err))
         setPopup(false)
-       
+      
     }
  
   

@@ -68,26 +68,25 @@ function Home() {
    
     
     const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            
-            userNew(selectedRows)
-            setEdit(selectedRows)
-            selectedRowKeys === check ? setCheck(-1) : setCheck(selectedRowKeys);
-           
+        onChange: (selectedRowKeys, selectedRows) => {            
+            userNew(selectedRows)            
+            selectedRowKeys === check ? setCheck(-1) : setCheck(selectedRowKeys);        
         }
+        
     };
 
     return (
         <div style={{ margin: "40px 0px" }}>
             <Buttons edited={edit} pend={isPanding} check={check} setch={setCheck} />
-             
+            {isPanding?<div>Loading...</div>: 
             <Table
                  
                 columns={columns} dataSource={data} rowKey={"id"}   rowSelection={{
                     type: 'radio',
-                   ...rowSelection
+                    
+                   ...rowSelection,
                   }}/>
-
+                }
             {check === -1 ? null : <Selected />}
         </div>
     )

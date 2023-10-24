@@ -3,8 +3,8 @@ import axios from 'axios'
 import { Button, Form, Input, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../redux/UserReducer';
-function Edit({ open, edited, setEdit,form,setch }) {
-    const disDate = useSelector((state)=>{
+function Edit({ open, edited, setEdit, form, setch }) {
+    const disDate = useSelector((state) => {
         return state.users.users
     })
     const dispatch = useDispatch();
@@ -25,16 +25,16 @@ function Edit({ open, edited, setEdit,form,setch }) {
                 email: e?.email
             }
 
-        ).then(res =>
-            
-            res.status===200?userNew(res.data):null
-          
-        ).catch(err=> console.log(err))
+        ).then((res) => {
+           
+            userNew([res.data])
+
+        }).catch(err => console.log(err))
         setEdit(false)
-     
-    
+
+
     }
-    
+
     return (
         open ? (
             <>
@@ -57,7 +57,7 @@ function Edit({ open, edited, setEdit,form,setch }) {
                                     { min: 3, message: "არავალიდური სახელი" }
                                 ]}
                             >
-                                <Input placeholder='სახელი გვარი'  />
+                                <Input placeholder='სახელი გვარი' />
                             </Form.Item>
                             <Form.Item style={{ height: "50px" }} name="dob" label="დაბ თარიღი"
                                 rules={[
@@ -67,7 +67,7 @@ function Edit({ open, edited, setEdit,form,setch }) {
                                     }
                                 ]}
                             >
-                                <Input type='date'  />
+                                <Input type='date' />
                             </Form.Item>
 
                             <Form.Item style={{ height: "50px" }} name="genderId" label="სქესი"
@@ -121,7 +121,7 @@ function Edit({ open, edited, setEdit,form,setch }) {
                                     { max: 11, message: "არასწორი პირადი ნომერი" }
                                 ]}
                             >
-                                <Input type='number' placeholder='პირადი ნომერი'  />
+                                <Input type='number' placeholder='პირადი ნომერი' />
                             </Form.Item>
 
                             <Form.Item style={{ height: "50px" }}
@@ -133,7 +133,7 @@ function Edit({ open, edited, setEdit,form,setch }) {
                                     },
                                     { type: 'email', message: "არასწორი მეილი" },
                                 ]}>
-                                <Input type='email' placeholder='მეილი'  />
+                                <Input type='email' placeholder='მეილი' />
                             </Form.Item>
 
                             <Form.Item   >

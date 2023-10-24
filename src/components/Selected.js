@@ -3,25 +3,38 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 function Selected() {
-    const disDate = useSelector((state)=>{
-        return state.users.users[0]
+    const[gend,setGend]=useState("") 
+    const disDate = useSelector((state) => {
+        return state.users.users
     })
-  
-  return (
-    <div style={{ margin:"0px 0px 40px"}}>
-        <p>{disDate.fullName}</p>
-        <p>{new Date(disDate.dob * 1000).toLocaleDateString('de-DE', {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            })}</p>
-        <p>{disDate.genderId==="0"?"მდედრობითი":"მამრობითი"}</p>
-        <p>{disDate.phone}</p>
-        <p>{disDate.address}</p>
-        <p>{disDate.personalNum}</p>
-        <p>{disDate.email}</p>
-    </div>
-  )
+
+   
+    const result =
+     disDate[0]?.genderId === "0" ? "მდედრობითი" 
+    :disDate[0]?.genderId === "1"
+    ?'მამრობითი'
+    : '';
+    
+    return (
+        <>
+            
+                <div style={{ margin: "0px 0px 40px" }}>
+                    <p>{disDate[0]?.fullName}</p>
+                    <p>{  new Date(disDate[0]?.dob * 1000).toLocaleDateString('de-DE', {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric"
+                    })}</p>
+                    <p>{result}</p>
+                    <p>{disDate[0]?.phone}</p>
+                    <p>{disDate[0]?.address}</p>
+                    <p>{disDate[0]?.personalNum}</p>
+                    <p>{disDate[0]?.email}</p>
+                </div>
+
+          
+        </>
+    )
 }
 
 export default Selected
